@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'vazir'; /* Define a unique name for your font */
+/* src: url('./fonts/Shekasteh\ V2.001.ttf') format('ttf');  */
+ src: url('./fonts/vazir-font-v16.1.0/Vazir-Bold.woff') format('woff'); 
+/*src: url('./fonts/Shekasteh\ V2.001.ttf') format('woff2');  */
+}
+
+*{
+  font-family: 'vazir' !important;
+}
+
+
+
+/* body{
+  display: flex;
+} */
+
+
+

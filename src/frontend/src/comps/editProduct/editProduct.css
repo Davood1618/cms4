@@ -1,0 +1,52 @@
+.productFormWrapper{
+    display: flex;
+ justify-content: center;
+}
+
+.editpr{
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 300px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: -1px 1px 6px;
+    top: 50%;
+    margin-top: 80px;
+ 
+}
+
+.prContentWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.prEdInp{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.productEditH{
+    margin-top: 20px;
+    font-size: 1rem;
+    display: block;
+}
+
+.btnWrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.editProductBtn{
+    font-size: 0.8rem;
+    margin: 10px;
+
+}
+
+.editProductH{
+    /* font-size: 0.9rem; */
+}

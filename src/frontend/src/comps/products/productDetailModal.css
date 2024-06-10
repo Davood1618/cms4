@@ -1,0 +1,50 @@
+.productTableFrame{
+    display: flex;
+ justify-content: center;
+}
+
+.productDetailTable{
+    display: flex;
+    background-color: rgb(235, 235, 235);
+    height: 20vh;
+    width: 300px;
+justify-content: center;
+border-radius: 10px;
+position: fixed;
+box-shadow: 1px 2px 5px 1px;
+opacity: 0;
+visibility: hidden;
+
+}
+
+.productDetailTable.active{
+    opacity: 1;
+    visibility:visible;
+}
+
+.productDetalHead{
+    display: grid;
+    direction: rtl;
+    align-items: center;
+    column-gap: 30px;
+    text-align: center;
+grid-template-columns: repeat(3,1fr);
+grid-template-rows: repeat(2,1fr);
+margin-left: 20px;
+
+}
+
+.productDetalHead th{
+    font-size:1.1rem;
+   
+}
+
+.produtctDetailCloseBtn{
+    display:flex;
+    left:0;
+    padding-left: -20px;
+    cursor: pointer;
+    margin-left: -1px;
+    margin-top: 5px;
+}
+
