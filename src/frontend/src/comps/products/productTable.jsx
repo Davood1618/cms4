@@ -17,15 +17,10 @@ export default function ProductTable() {
  
 
   useEffect(() => {
-    fetch('http://localhost:8000/posts/all').then(res => res.json()).then(data => console.log(data));
+    fetch('http://localhost:8000/products/all')
+    .then(res => res.json())
+    .then((data) => setAllProducts(data));
   }, []);
-  
-
-
-
-
-
-
   
 
 
@@ -78,35 +73,46 @@ export default function ProductTable() {
               <button className="productButton">edit</button>
             </td>
           </head>
-          {allProducts.map(product=>(
 
-            <tr className="productTr">
-            <td className="productTd">
-              <img src={oilImg} className="productImg" />
-            </td>
-            <td className="productTd">{product.title}</td>
-            <td className="productTd">5</td>
-            <td className="productTd">5</td>
-            <td className="productTd lastProductTd">
-              <button
-                className="productButton btn btn-sm btn-primary"
-                onClick={() => setDetailModalShow(true)}>
-                جزییات
-              </button>
-              <button
-                className="productButton btn btn-sm btn-primary"
-                onClick={() => setPrMsg(true)}>
-                حذف
-              </button>
-              <button
-                className="productButton btn btn-sm btn-primary"
-                onClick={() => setEditProductModalShow(true)}>
-                ویرایش
-              </button>
-            </td>
-          </tr>
-          ))}
 
+{console.log(allProducts)}
+       
+
+       {allProducts.products.map(prod=>(
+
+
+       <tr className="productTr">
+       <td className="productTd">
+         <img src={prod.img} className="productImg" />
+       </td>
+       <td className="productTd">{prod.title}</td>
+       <td className="productTd">{prod.price}</td>
+       <td className="productTd">{prod.count}</td>
+       <td className="productTd lastProductTd">
+         <button
+           className="productButton btn btn-sm btn-primary"
+           onClick={() => setDetailModalShow(true)}>
+           جزییات
+         </button>
+         <button
+           className="productButton btn btn-sm btn-primary"
+           onClick={() => setPrMsg(true)}>
+           حذف
+         </button>
+         <button
+           className="productButton btn btn-sm btn-primary"
+           onClick={() => setEditProductModalShow(true)}>
+           ویرایش
+         </button>
+       </td>
+     </tr>
+     
+
+       ))}
+
+
+       
+           
         </table>
       </div>
       {prMsg && (
