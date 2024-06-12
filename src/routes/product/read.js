@@ -27,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
     let product;
 
     try {
-        product = await Post.findById(id)
+        product = await Product.findById(id)
     } catch(err) {
         return next(err)
     }
