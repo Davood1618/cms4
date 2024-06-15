@@ -7,20 +7,28 @@ import EditProduct from "./../editProduct/editProduct";
 import Error from "./../error/error";
 import product from "./product";
 
-export default function ProductTable() {
+export default function ProductTable({getAllProducts, allProducts}) {
   const [deleteProductModalShow, setdeleteProductModalShow] = useState(false);
   const [detailProductModalShow, setDetailProductModalShow] = useState(false);
   const [editProductModalShow, setEditProductModalShow] = useState(false);
-  const [allProducts, setAllProducts] = useState([]);
   const [productId, setProductId] = useState(null);
   const [mainDetailProduct, setMainDetailProduct] = useState({});
+  const [updatedTitle, setupdatedTitle] = useState();
+  const [updatedPrice, setupdatedPrice] = useState();
+  const [updatedCount, setupdatedCount] = useState();
+  const [updatedImg, setupdatedImg] = useState();
+  const [updatedColor, setupdatedColor] = useState();
 
 
-  const getAllProducts = () => {
-    fetch("http://localhost:8000/products/all")
-      .then((res) => res.json())
-      .then((data) => setAllProducts(data.products));
+  const updatedProductInfo = {
+
+    title: updatedTitle,
+    price: updatedPrice,
+    count: updatedCount,
+    img: updatedImg,
+    colors: updatedColor,
   };
+
 
   // fetch functions//
 
@@ -29,29 +37,18 @@ export default function ProductTable() {
       method: "Delete",
     })
       .then((res) => res.json())
-      .then((data) => {});
-    setdeleteProductModalShow(false);
-    getAllProducts();
+      .then((data) => {console.log(data)
+        getAllProducts();
+
+      });
+    
+        setdeleteProductModalShow(false);
+
   };
 
 
-  // const updateModalSubmitAction = () => {
-  //   fetch(`http://localhost:8000/products/update/${productId}`, {
-  //     method: "POST",
-  //     headers:{
-  //       "Content_Type":'application/json'
-  //     },
-  //     body:JSON.stringify(updatedProductInfo)
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {console.log(data)});
-  //     // setEditProductModalShow(false);
-  //   getAllProducts();
-  // };
 
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+
 
   // button of those 3 modals...
 
@@ -71,10 +68,31 @@ export default function ProductTable() {
     setEditProductModalShow(false);
   };
 
-  const editeProductInfos = (event) => {
-    event.preventDefault();
+
+  const editeProductInfos = () => {
+    // event.preventDefault();
+    updateModalSubmitAction()
     console.log("updated");
   };
+
+ 
+
+  const updateModalSubmitAction = () => {
+    fetch(`http://localhost:8000/products/update/${productId}`, {
+      method: "POST",
+      headers:{
+        "Content-Type":'application/json'
+      },
+      body:JSON.stringify(updatedProductInfo)
+    })
+      .then((res) => res.json())
+      .then((data) => {console.log(data)});
+    getAllProducts();
+    // setEditProductModalShow(false);
+  };
+
+
+ 
 
   return (
     <>
@@ -85,11 +103,36 @@ export default function ProductTable() {
           submitEditModal={editeProductInfos}
         >
           <div className="prEdInp">
-            <input type="text" placeholder="اسم محصول را وارد کنید" valu/>
-            <input type="text" placeholder="قیمت محصول را وارد کنید" />
-            <input type="text" placeholder="تعداد محصول را وارد کنید" />
-            <input type="text" placeholder="عکس محصول را وارد کنید" />
-            <input type="text" placeholder="رنگ محصول را وارد کنید" />
+            <input
+              type="text"
+              placeholder="اسم محصول را وارد کنید"
+              value={updatedTitle}
+              onChange={(event) => setupdatedTitle(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="قیمت محصول را وارد کنید"
+              value={updatedPrice}
+              onChange={(event) => setupdatedPrice(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="تعداد محصول را وارد کنید"
+              value={updatedCount}
+              onChange={(event) => setupdatedCount(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="عکس محصول را وارد کنید"
+              value={updatedImg}
+              onChange={(event) => setupdatedImg(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="رنگ محصول را وارد کنید"
+              value={updatedColor}
+              onChange={(event) => setupdatedColor(event.target.value)}
+            />
           </div>
         </EditProduct>
       )}
@@ -109,6 +152,8 @@ export default function ProductTable() {
         <ProductDeleteModals
           submitAction={deleteModalSubmitAction}
           cancelAction={cancelModalAction}
+          getAllProducts={getAllProducts}
+          
         />
       )}
 
@@ -156,6 +201,7 @@ export default function ProductTable() {
                     onClick={() => {
                       setdeleteProductModalShow(true);
                       setProductId(prod._id);
+                      setMainDetailProduct(prod);
                     }}
                   >
                     حذف
@@ -164,7 +210,13 @@ export default function ProductTable() {
                     className="productButton btn btn-sm btn-primary"
                     onClick={() => {
                       setEditProductModalShow(true);
-                      setProductId(prod._id)
+                      setProductId(prod._id);
+                      setMainDetailProduct(prod);
+                      setupdatedTitle(prod.title);
+                      setupdatedPrice(prod.price);
+                      setupdatedCount(prod.count);
+                      setupdatedImg(prod.img);
+                      setupdatedColor(prod.colors);
                       // updateModalSubmitAction()
                     }}
                   >

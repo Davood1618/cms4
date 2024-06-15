@@ -1,7 +1,49 @@
 import React from "react";
 import "./products.css";
+import { useState, useEffect } from "react";
 
-export default function () {
+export default function ({ getAllProducts }) {
+  const [newTitle, setNewTitle] = useState();
+  const [newPrice, setNewPrice] = useState();
+  const [newCount, setNewCount] = useState();
+  const [newImg, setNewImg] = useState();
+  const [newColor, setNewColor] = useState();
+
+  const newProductObj = {
+    title: newTitle,
+    price: newPrice,
+    count: newCount,
+    img: newImg,
+    colors: newColor,
+  };
+
+  const emptyNewProductBox = ()=>{
+    setNewTitle("");
+    setNewPrice("");
+    setNewCount("");
+    setNewImg("");
+    setNewColor("");
+
+  }
+
+
+
+  const submitNewProduct = () => {
+    fetch(`http://localhost:8000/products/create`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newProductObj),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        getAllProducts();
+        emptyNewProductBox()
+      });
+
+
+  };
+
   return (
     <div>
       <div className="productMainContainer">
@@ -14,28 +56,8 @@ export default function () {
                 type="text"
                 className="productText px-sm-2 px-md-4 px-lg-6"
                 placeholder="اسم محصول را وارد کنید"
-              />
-            </div>
-            <div className="productBox">
-              <input
-                type="text"
-                className="productText px-sm-2 px-md-4 px-lg-6"
-                placeholder="موجودی محصول را بنویسید"
-              />
-            </div>
-            <div className="productBox">
-              <input
-                type="text"
-                className="productText px-sm-2 px-md-4 px-lg-6"
-                placeholder="میران محبوبیت محصول را بنویسید"
-              />
-            </div>
-
-            <div className="productBox">
-              <input
-                type="text"
-                className="productText px-sm-2 px-md-4 px-lg-6"
-                placeholder="تعداد رنگ بندی محصول را بنویسید"
+                value={newTitle}
+                onChange={(event) => setNewTitle(event.target.value)}
               />
             </div>
             <div className="productBox">
@@ -43,23 +65,46 @@ export default function () {
                 type="text"
                 className="productText px-sm-2 px-md-4 px-lg-6"
                 placeholder="قیمت محصول را بنویسید"
+                value={newPrice}
+                onChange={(event) => setNewPrice(event.target.value)}
               />
             </div>
             <div className="productBox">
               <input
                 type="text"
                 className="productText px-sm-2 px-md-4 px-lg-6"
-                placeholder="ادرس عکس محصول را بنویسید"
+                placeholder="تعداد محصول را بنویسید"
+                value={newCount}
+                onChange={(event) => setNewCount(event.target.value)}
+              />
+            </div>
+
+            <div className="productBox">
+              <input
+                type="text"
+                className="productText px-sm-2 px-md-4 px-lg-6"
+                placeholder="عکس محصول را بنویسید"
+                value={newImg}
+                onChange={(event) => setNewImg(event.target.value)}
               />
             </div>
             <div className="productBox">
               <input
                 type="text"
                 className="productText px-sm-2 px-md-4 px-lg-6"
-                placeholder="میزان فروش محصول را بنویسید"
+                placeholder="رنگ محصول را بنویسید"
+                value={newColor}
+                onChange={(event) => setNewColor(event.target.value)}
               />
             </div>
-            <button className="btn btn-success productBtn"> subbmit</button>
+
+            <button
+              className="btn btn-success productBtn"
+              onClick={submitNewProduct}
+            >
+              {" "}
+              subbmit
+            </button>
           </div>
         </div>
       </div>
