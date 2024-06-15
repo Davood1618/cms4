@@ -37,7 +37,7 @@ app.use(
   createCommentRoute,
   readCommentRoute,
   updateCommentRoute,
-  deleteCommentRoute
+  deleteCommentRoute,
 );
 
 app.use(

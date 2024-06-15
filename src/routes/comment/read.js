@@ -4,6 +4,21 @@ const Comment = require('../../models/comment')
 
 const router = express.Router()
 
+
+
+router.get('/all/', async (req, res, next) => {
+    
+
+
+    try {
+        const allComments = await Comment.find({});
+        return res.status(200).json({ allComments })
+    } catch (err) {
+        return next(err)
+    } 
+})
+
+
 router.get('/all/:postId', async (req, res, next) => {
     const { postId } = req.params;
 
