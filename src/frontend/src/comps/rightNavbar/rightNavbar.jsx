@@ -6,7 +6,7 @@ import { FaRegComment } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { SlBasket } from "react-icons/sl";
 import { MdOutlineDiscount } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Outlet } from 'react-router-dom';
 
 
@@ -26,27 +26,27 @@ export default function rightNavbar() {
           </li>
           <li>
             <RxDashboard className="icon" />
-            <Link to="/">صفحه اصلی</Link>
+            <NavLink  to="/">صفحه اصلی</NavLink >
           </li>
           <li>
             <MdOutlineProductionQuantityLimits className="icon" />
-            <Link to="/products">محصولات</Link>
+            <NavLink  to="/products">محصولات</NavLink >
           </li>
           <li>
             <FaRegComment className="icon" />
-            <Link to="/comments">کامنت ها</Link>
+            <NavLink  to="/comments">کامنت ها</NavLink >
           </li>
           <li>
             <FaRegUser className="icon" />
-            <Link to="/users">کاربران</Link>
+            <NavLink  to="/users">کاربران</NavLink >
           </li>
           <li>
             <SlBasket className="icon" />
-            <Link to="/orders">سفارش ها</Link>
+            <NavLink  to="/orders">سفارش ها</NavLink >
           </li>
           <li>
             <MdOutlineDiscount className="icon" />
-            <Link to="/discounts">تخفیف ها</Link>
+            <NavLink  to="/discounts">تخفیف ها</NavLink  >
           </li>
         </ul>
       </div>
